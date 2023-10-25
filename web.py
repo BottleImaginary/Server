@@ -36,7 +36,7 @@ def handle_data():
         values = ( new_data['nama_user'],)
         cursor.execute(query, values)
         db.commit()
-        return jsonify({'message': 'Data berhasil ditambahkan'})
+        return jsonify({'message':  'Data berhasil ditambahkan'})
 
 
 if __name__ == '__main__':
