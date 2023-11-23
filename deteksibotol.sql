@@ -1,22 +1,23 @@
-CREATE DATABASE deteksibotol;
+-- Active: 1700712435596@@127.0.0.1@3306@deteksibotol_db
+CREATE DATABASE deteksibotol_db;
 
-USE deteksibotol;
+USE deteksibotol_db;
 
-CREATE TABLE user (
-	id_user INT AUTO_INCREMENT PRIMARY KEY,
-	nama_user VARCHAR(20) NOT NULL
-);
 CREATE TABLE botol (
 	id_botol INT AUTO_INCREMENT PRIMARY KEY,
-	id_user INT NOT NULL,
-	gambar_botol BLOB NOT NULL,
-	waktu TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (id_user) REFERENCES user(id_user)
+	nama_botol VARCHAR(25) NOT NULL,
+	gambar_botol BLOB,
+	tgl_input DATETIME
 );
-CREATE TABLE catatan (
-	id_catatan INT AUTO_INCREMENT PRIMARY KEY,
-	id_botol INT NOT NULL,
-	waktu_deteksi TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	lokasi_deteksi VARCHAR(30),
-	FOREIGN KEY (id_botol) REFERENCES botol(id_botol)
-)
+CREATE TABLE lantai (
+	id_lantai INT AUTO_INCREMENT PRIMARY KEY,
+	nama_lantai VARCHAR(25) NOT NULL
+);
+CREATE TABLE deteksi (
+	id_deteksi INT AUTO_INCREMENT PRIMARY KEY,
+	id_botol INT,
+	id_lantai INT,
+	hasil_deteksi VARCHAR(25) NOT NULL,
+	FOREIGN KEY (id_botol) REFERENCES botol(id_botol) ON DELETE CASCADE ,
+	FOREIGN KEY (id_lantai) REFERENCES lantai(id_lantai) ON DELETE CASCADE
+);
